@@ -212,6 +212,10 @@ html,body {
 	padding:20px;
 	background:url(images/icons/export.png) no-repeat left center;
 }
+.importDocument_icon{
+	padding:20px;
+	background:url(images/icons/document.png) no-repeat left center;
+}
 .import_icon{
 	padding:20px;
 	background:url(images/icons/import.png) no-repeat left center;

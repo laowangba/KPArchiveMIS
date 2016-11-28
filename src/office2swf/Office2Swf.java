@@ -105,6 +105,44 @@ public class Office2Swf {
 			System.out.println("****swf转换器异常，需要转换的文档不存在，无法转换****");
 		}
 	}
+	
+	/*
+	 * PDF转为DOC @param file
+	 */
+	public void pdf2doc() throws Exception {
+		if (docFile.exists()) {
+			if (!pdfFile.exists()) {
+				OpenOfficeConnection connection = new SocketOpenOfficeConnection(
+						8100);
+				try {
+					System.out.println("开始进行doc2pdf转换");
+					connection.connect();
+					DocumentConverter converter = new OpenOfficeDocumentConverter(
+							connection);
+					converter.convert(docFile, pdfFile);
+					connection.disconnect();
+					System.out.println("****pdf转换成功，PDF输出：" + pdfFile.getPath()
+							+ "****");
+				} catch (java.net.ConnectException e) {
+					// ToDo Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("****swf转换异常，openoffice服务未启动！****");
+					throw e;
+				} catch (com.artofsolving.jodconverter.openoffice.connection.OpenOfficeException e) {
+					e.printStackTrace();
+					System.out.println("****swf转换器异常，读取转换文件失败****");
+					throw e;
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw e;
+				}
+			} else {
+				System.out.println("****已经转换为pdf，不需要再进行转化****");
+			}
+		} else {
+			System.out.println("****swf转换器异常，需要转换的文档不存在，无法转换****");
+		}
+	}
 
 	/*
 	 * 转换成swf

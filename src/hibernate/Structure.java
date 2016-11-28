@@ -1,9 +1,15 @@
 package hibernate;
 
 import java.sql.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class Structure implements java.io.Serializable{
 	// Fields
+	@Id
+	@GeneratedValue
 	private Integer strucId;
 	private String content;
 	// Constructors

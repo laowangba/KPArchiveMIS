@@ -124,6 +124,30 @@
     <servlet-name>LogOff</servlet-name>
     <url-pattern>/LogOff</url-pattern>
   </servlet-mapping>
+   <servlet>
+       <servlet-name>CreateFile</servlet-name>
+       <servlet-class>servlet.CreateNewFile</servlet-class>
+   </servlet>
+   <servlet-mapping>
+       <servlet-name>CreateFile</servlet-name>
+       <url-pattern>/serviet/CreateFile</url-pattern>
+   </servlet-mapping>
+    <servlet>
+       <servlet-name>GetMouldById</servlet-name>
+       <servlet-class>servlet.GetMouldById</servlet-class>
+   </servlet>
+   <servlet-mapping>
+       <servlet-name>GetMouldById</servlet-name>
+       <url-pattern>/selrviet/GetMouldById</url-pattern>
+   </servlet-mapping>
+    <servlet>
+        <servlet-name>KeepInfile</servlet-name>
+        <servlet-class>servlet.KeepInfile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>KeepInfile</servlet-name>
+        <url-pattern>/serviet/KeepInfile</url-pattern>
+    </servlet-mapping>
   <servlet>
     <description>search</description>
     <display-name>search file by content</display-name>
@@ -159,4 +183,5 @@
     <filter-name>RightFilter</filter-name>
     <url-pattern>*.jsp</url-pattern>
   </filter-mapping>
+   
 </web-app>

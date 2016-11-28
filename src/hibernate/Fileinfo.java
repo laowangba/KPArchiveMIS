@@ -2,15 +2,21 @@ package hibernate;
 
 import java.sql.Blob;
 import java.sql.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Fileinfo entity. @author MyEclipse Persistence Tools
  */
 
+@Entity
 public class Fileinfo implements java.io.Serializable {
 
 	// Fields
 
+	@Id
+	@GeneratedValue
 	private Integer fileId;
 	private String fileName;
 	private String timeName;

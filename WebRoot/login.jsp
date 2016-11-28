@@ -50,7 +50,7 @@
 				</tr>
 			</table>
 		</form>
-	</div
+	</div>
 	
 	<!--用户注册弹窗-->
 	<div id="registerPage" style="display:none;">

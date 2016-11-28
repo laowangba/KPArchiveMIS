@@ -53,7 +53,7 @@ public class Uploadify extends HttpServlet {
 		String fileRealPath1 = "";// 原文件名存放的真实地址
 		String firstFileName = "";
 
-		// 构建容器中上传的文件所在的物理路径，
+		// 构建容器中上传的文件所在的物理路径，是一个文件夹路径，保存着所有和此文件相关的文件
 		String savePath = this.getServletConfig().getServletContext()
 				.getRealPath("/")
 				+ "userFile\\" + newfolderName + "\\" + newfileName + "\\";
@@ -165,7 +165,6 @@ public class Uploadify extends HttpServlet {
 		 */
 		Office2Swf d = new Office2Swf(fileRealPath);
 		d.conver();
-
 	}
 
 	@Override

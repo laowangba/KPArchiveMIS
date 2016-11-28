@@ -1,15 +1,21 @@
 package hibernate;
 
 import java.sql.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Items entity. @author MyEclipse Persistence Tools
  */
 
+@Entity
 public class User implements java.io.Serializable {
 
 	// Fields
 
+	@Id
+	@GeneratedValue
 	private Integer Id;
 	private String userId;
 	private String passwd;

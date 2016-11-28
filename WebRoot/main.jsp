@@ -43,12 +43,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<% String str=(String)session.getAttribute("grade");%>
     	<% if(str != null) {%>
     	<% if(str.equals("superAdmin")){ %>
+    	  <a class="importDocument_icon" href="./createFile.jsp" title="点击录入" target="_blank">录入文档</a>
 	      <a id="config" href="#" class="user_config_icon" title="点击管理">权限管理</a>
-	       <script src="js/treeset - old.js" type="text/javascript"></script>
-	       <script>
-          var btnFilePanel = document.getElementById('btnFilePanel');
-          btnFilePanel.style.visibility = 'visible';
-        </script>
+	      <script src="js/treeset - old.js" type="text/javascript"></script>
+	      <script>
+            var btnFilePanel = document.getElementById('btnFilePanel');
+            btnFilePanel.style.visibility = 'visible';
+          </script>
 		<% }else if(str.equals("admin")){%>
 			<script src="js/treeset - old.js" type="text/javascript"></script>
 			<script>

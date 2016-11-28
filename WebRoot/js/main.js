@@ -116,6 +116,7 @@ $(function(){
 		buttonText:'导入数据',
 		queueID:'uploadFile-dialog',
 //		multi:true,
+		buttonClass:'o_icon import',
 		fileTypeExts:'*.db',
 		fileTypeDesc:'数据文件',
 		uploader:'servlet/RecoverDate',//上传到处理上传的文件的servlet
@@ -142,6 +143,7 @@ $(function(){
 		auto:true,
 		swf:'js/uploadify/uploadify.swf',
 		buttonText:'添加文件',
+		buttonClass:'o_icon muti_upload',
 		queueID:'uploadFile-dialog',
 		multi:true,
 		fileTypeExts:'*.doc; *.docx; *.jpg; *.png; *.pdf; *.jpeg;',
