@@ -43,7 +43,7 @@
 		6、jdk使用6.0及以上版本
 		7、将便携版的mysql、openOffice、swfTools放入tomcat的bin目录中
 			tomcat的bin目录中：
-![目录结构](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/bin目录.png)
+![目录结构](https://github.com/JYFiaueng/KPArchiveMIS/blob/master/docs/bin目录.png)
 		8、修改tomcat的项目目录，指定在tomcat根目录的外面，在tomcat/conf/server.xml 158行中修改
 		9、mysql表结构：
 ![目录结构](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/mysql.png)
