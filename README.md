@@ -43,14 +43,13 @@
 		6、jdk使用6.0及以上版本
 		7、将便携版的mysql、openOffice、swfTools放入tomcat的bin目录中
 		8、修改tomcat的项目目录，指定在tomcat根目录的外面，在tomcat/conf/server.xml 158行中修改
-		9、mysql表结构：
 ![目录结构](https://github.com/JYFiaueng/KPArchiveMIS/blob/master/docs/bin目录.png)
 ![目录结构](https://github.com/JYFiaueng/KPArchiveMIS/blob/master/docs/mysql.png)
 
 ### 用户文件存储方式：
 		用户上传的源文件都会以二进制文件（blob）的形式存储在数据库中。
 		在编译后代码的userFile目录中会将用户上传的文件和转换的文件全部存储一份。
-		存储结构：
+本地持久化存储结构：
 ![文件持久化](https://github.com/JYFiaueng/KPArchiveMIS/blob/master/docs/文件目录组织结构.png)
 
 ### 最终效果
