@@ -20,16 +20,16 @@
 			档案管理员的所有功能；
 
 ### 实现方式
-		后端使用语言：				java
-		Web Server：					Apache Tomcat
-		数据持久化：					mysql
-		操作数据库：					Hibernate
-		前端框架：						jQuery/jQueryUI
-		word转pdf：						openOffice
-		pdf/png/jpg转swf：		swfTools
-		swf文件的页面展示：		Flexpaper
-		多文件上传：					Uploadify
-		录入文档：						ZUI框架的富文本插件
+		后端使用语言：java
+		Web Server：Apache Tomcat
+		数据持久化：mysql
+		操作数据库：Hibernate
+		前端框架：jQuery/jQueryUI
+		word转pdf：openOffice
+		pdf/png/jpg转swf：swfTools
+		swf文件的页面展示：Flexpaper
+		多文件上传：Uploadify
+		录入文档：ZUI框架的富文本插件
 
 ### 需求分析
 		![需求](https://github.com/JYFiaueng/KPArchiveMIS/edit/master/docs/档案管理系统.png)
