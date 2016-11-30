@@ -32,7 +32,7 @@
 		录入文档：ZUI框架的富文本插件
 
 ### 需求分析
-		![需求](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/档案管理系统.png)
+![需求](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/档案管理系统.png)
 
 ### 如何部署
 		1、下载系统源码
@@ -43,17 +43,17 @@
 		6、jdk使用6.0及以上版本
 		7、将便携版的mysql、openOffice、swfTools放入tomcat的bin目录中
 			tomcat的bin目录中：
-			![目录结构](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/bin目录.png)
+![目录结构](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/bin目录.png)
 		8、修改tomcat的项目目录，指定在tomcat根目录的外面，在tomcat/conf/server.xml 158行中修改
 		9、mysql表结构：
-			![目录结构](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/mysql.png)
+![目录结构](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/mysql.png)
 
 ### 用户文件存储方式：
 		用户上传的源文件都会以二进制文件（blob）的形式存储在数据库中。
 		在编译后代码的userFile目录中会将用户上传的文件和转换的文件全部存储一份。
 		存储结构：
-			![文件持久化](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/文件目录组织结构.png)
+![文件持久化](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/文件目录组织结构.png)
 
 ### 最终效果
-		![1](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/效果1.png)
-		![2](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/效果2.png)
+![1](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/效果1.png)
+![2](https://github.com/JYFiaueng/KPArchiveMIS/master/docs/效果2.png)
