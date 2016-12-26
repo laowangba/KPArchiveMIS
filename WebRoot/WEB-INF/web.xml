@@ -132,6 +132,7 @@
        <servlet-name>CreateFile</servlet-name>
        <url-pattern>/serviet/CreateFile</url-pattern>
    </servlet-mapping>
+   
     <servlet>
        <servlet-name>GetMouldById</servlet-name>
        <servlet-class>servlet.GetMouldById</servlet-class>
@@ -140,6 +141,16 @@
        <servlet-name>GetMouldById</servlet-name>
        <url-pattern>/selrviet/GetMouldById</url-pattern>
    </servlet-mapping>
+   
+   <servlet>
+       <servlet-name>DownloadKeepInWord</servlet-name>
+       <servlet-class>servlet.DownloadKeepInWord</servlet-class>
+   </servlet>
+   <servlet-mapping>
+       <servlet-name>DownloadKeepInWord</servlet-name>
+       <url-pattern>/selrviet/DownloadKeepInWord</url-pattern>
+   </servlet-mapping>
+   
     <servlet>
         <servlet-name>KeepInfile</servlet-name>
         <servlet-class>servlet.KeepInfile</servlet-class>

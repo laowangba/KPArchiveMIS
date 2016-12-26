@@ -14,19 +14,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link type="text/css" rel="stylesheet" href="css/jquery-ui.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/uploadify.css" />
 	<link type="text/css" rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="js/kindeditor/kindeditor.min.css ">
+	<!-- <link rel="stylesheet" href="css/zui.min.css" /> -->
 	
 	<link rel="stylesheet" href="css/screen.css" />
     <link rel="stylesheet" href="css/jquery.treemenu.css" />
     <link rel="stylesheet" href="css/asideStyle.css" />
-
-	<!--[if lte IE 8]>
-	<script type="text/javascript" src="scripts/html5.js"></script>
-	<![endif]-->
-	<script type="text/javascript" src="js/jquery/jquery-1.9.1.min.js"></script>
+    
+    <script type="text/javascript" src="js/jquery/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/uploadify/jquery.uploadify.min.js"></script>
 	<script src="js/jquery.treemenu - change.js" type="text/javascript"></script>
 	<script src="js/jquery.dragsort-0.5.2.min.js"></script>
+
+	<!--[if lte IE 8]>
+	<script type="text/javascript" src="scripts/html5.js"></script>
+	<![endif]-->
 	<title>档案管理</title>
 </head>
 <body>
@@ -43,7 +46,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<% String str=(String)session.getAttribute("grade");%>
     	<% if(str != null) {%>
     	<% if(str.equals("superAdmin")){ %>
-    	  <a class="importDocument_icon" href="./createFile.jsp" title="点击录入" target="_blank">录入文档</a>
+    	  <a class="importDocument_icon" href="#" title="点击录入" id="importDocument">录入文档</a>
+    	  <a class="savelist_icon" href="#" title="点击查看" id="saveList">暂存列表</a>
 	      <a id="config" href="#" class="user_config_icon" title="点击管理">权限管理</a>
 	      <script src="js/treeset - old.js" type="text/javascript"></script>
 	      <script>
@@ -137,10 +141,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<iframe></iframe>
 </div>
 
+<!-- 模版的弹窗 -->
+<div id="importDocument-dialog" title="选择模版">
+
+</div>
+<!-- 暂存列表的弹窗 -->
+<div id="saveList-dialog" title="选择文档">
+
+</div>
+
+<a href="selrviet/DownloadKeepInWord" id="downloadKeepIn"></a>
+
 <script type="text/javascript" src="js/main.js"></script>
 <script src="js/aside.js" type="text/javascript"></script>
 
 
+
+<script src="js/kindeditor/kindeditor.js"></script>
 
 </body>
 </html>

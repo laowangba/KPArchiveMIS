@@ -13,17 +13,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/zui.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/global.css" />
 	<link type="text/css" rel="stylesheet" href="css/main.css" />
-	<link rel="stylesheet" href="js/kindeditor/kindeditor.min.css ">
-	<link rel="stylesheet" href="css/zui.min.css" />
+	<!-- <link rel="stylesheet" href="js/kindeditor/kindeditor.min.css "> -->
+	<!-- <link rel="stylesheet" href="css/zui.min.css" /> -->
 	
     <link rel="stylesheet" href="css/asideStyle.css" />
 
 	<!--[if lte IE 8]>
 	<script type="text/javascript" src="scripts/html5.js"></script>
 	<![endif]-->
-	<script type="text/javascript" src="js/jquery/jquery-1.9.1.min.js"></script>
-	<script src="js/zui.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/kindeditor/kindeditor.js"></script>
 	<title>创建文件</title>
 </head>
 <body>
@@ -127,6 +124,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="js/jquery/jquery-1.9.1.min.js"></script>
+<script src="js/zui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/kindeditor/kindeditor.min.js"></script>
 <script src="js/createFile.js" type="text/javascript"></script>
 
 

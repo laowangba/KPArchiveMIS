@@ -184,37 +184,7 @@ $(document).ready(function() {
     /*****************重命名框******************** */
     
       
-    // 正则检查
-    function checkRegexp( o, regexp, n ) {
-      if ( !( regexp.test( o.val() ) ) ) {
-        o.addClass( "ui-state-error" );
-        updateTips( n );
-        return false;
-      } else {
-        return true;
-      }
-    }
-    /*********长度检查*********/
-     function checkLength( o, n, min ) {
-      if ( o.val().length <= min ) {
-        o.addClass( "ui-state-error" );
-        updateTips( "" + n + " 的长度必须大于 " +
-          min );
-        return false;
-      } else {
-        return true;
-      }
-    }
-    /******错误提示*******/
-     function updateTips( t ) {
-       var tips = $( ".validateTips" );
-      tips
-        .text( t )
-        .addClass( "ui-state-highlight" );
-      setTimeout(function() {
-        tips.removeClass( "ui-state-highlight", 1500 );
-      }, 500 );
-    }
+    
     /***********重命名**************/
     var renameFn = function(name){
        $(".selected").find("a:eq(0)").text(name);
@@ -232,7 +202,7 @@ $(document).ready(function() {
     var changeFormAlert = function(title,label,fn,o){
       var name = $( "#name" ),
       allFields = $( [] ).add( name );
-      $( "#dialog-form" ).attr("title",title).find("p").text("");
+      $( "#dialog-form" ).attr("title","输入名称").find("p").text("");
       $( "#dialog-form>label" ).text(label);
       $( "#dialog-form" ).dialog({
       modal: true,
@@ -260,3 +230,34 @@ $(document).ready(function() {
     });
     };
 });
+//正则检查
+function checkRegexp( o, regexp, n ) {
+  if ( !( regexp.test( o.val() ) ) ) {
+    o.addClass( "ui-state-error" );
+    updateTips( n );
+    return false;
+  } else {
+    return true;
+  }
+}
+/*********长度检查*********/
+ function checkLength( o, n, min ) {
+  if ( o.val().length <= min ) {
+    o.addClass( "ui-state-error" );
+    updateTips( "" + n + " 的长度必须大于 " +
+      min );
+    return false;
+  } else {
+    return true;
+  }
+}
+/******错误提示*******/
+ function updateTips( t ) {
+   var tips = $( ".validateTips" );
+  tips
+    .text( t )
+    .addClass( "ui-state-highlight" );
+  setTimeout(function() {
+    tips.removeClass( "ui-state-highlight", 1500 );
+  }, 500 );
+}

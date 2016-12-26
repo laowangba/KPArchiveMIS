@@ -65,7 +65,7 @@ public class GetFileInfo extends HttpServlet {
 			}
 		}
 		str += "]";
-		System.out.println(str);
+//		System.out.println(str);
 		out.print(str);
 		out.flush();
 		out.close();

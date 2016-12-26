@@ -59,6 +59,8 @@ public class CreateNewFile extends HttpServlet{
 		String fileName = request.getParameter("title");
 		String html = request.getParameter("content");
 		
+		System.out.println(fileName);
+		
 		java.util.Date date = new java.util.Date();
 		SimpleDateFormat sdfFolderName = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat sdfFileName = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -133,8 +135,6 @@ public class CreateNewFile extends HttpServlet{
 			out.write("2");
 			e.printStackTrace();
 		}
-		out.flush();
-		out.close();
 
 	//	将pdf文件转换为swf文件
 		Office2Swf d = new Office2Swf(fileRealPath);
@@ -142,12 +142,14 @@ public class CreateNewFile extends HttpServlet{
 			//获取到记录的条数
 			int count = OperationFileInfo.GetTableInfoCount();
 			String ulcontent = OperateStructure.getContent();
-			ulcontent += "<li class='filepdf tree-empty'><span class='toggler'></span><a class='file' title='双击打开' data-id='"+count+"' data-time='"+newfolderName + "/" + newfileName + "/" + newfileName+"'>"+fileName+"</a><a title='点击下载' href='servlet/DownloadFile?filename="+newfolderName + "/" + newfileName + "/" + fileName+".doc' class='downfile'></a></li>";
+			ulcontent += "<li class='filepdf tree-empty'><span class='toggler'></span><a class='file' title='双击打开' data-id='"+count+"' data-time='"+newfolderName + "/" + newfileName + "/" + newfileName+"'>"+fileName+"</a><a title='点击下载' href='servlet/DownloadFile?filename="+newfolderName + "/" + newfileName + "/" + fileName+".pdf' class='downfile'></a></li>";
 			OperateStructure.savaContent(ulcontent);
 			out.write("1");
 		}else{
 			out.write("2");
 		}
+		out.flush();
+		out.close();
 	}
 
 	@Override

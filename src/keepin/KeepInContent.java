@@ -79,6 +79,15 @@ public class KeepInContent {
 		
 		return "{\"titles\":"+title+",\"contents\":"+content+"}";
 	}
+	public static String getFileName(int id){
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		Keepin f = (Keepin) session.get(Keepin.class, id);
+		session.flush();
+		transaction.commit();
+		session.close();
+		return f.getName();
+	}
 	public static String getInById(int id){
 		session = sessionFactory.openSession();
 		transaction = session.beginTransaction();

@@ -270,7 +270,8 @@
         cssPath: '',
         cssData: '',
         minWidth: 650,
-        minHeight: 500,
+        minHeight: parseInt(document.getElementById('main').getClientRects()[0].height),
+        //minHeight: 500,
         minChangeSize: 50,
         zIndex: 811213,
         items: [

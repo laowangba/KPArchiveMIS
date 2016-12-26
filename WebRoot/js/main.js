@@ -1,8 +1,10 @@
 ﻿var tabs;
 var tabCount = 0;//用于记录打开过的标签页的总数
+var tabCount1 = 0;
 var tabNumber = 0;//用于记录现有的标签页的总数
 var sucnumber=0;
 var isShowDefaule = true;//当前页面显示的是不是首页
+var editors = [],usemould,type=1;
 
 //首次打开页面从数据库中获取所有档案
 //allFile();
@@ -226,7 +228,8 @@ function addTabContent(event){
 	var tabsList = $('#tabsList');
 	var contentList = $('#contentList');
 	//构建要加载到页面的元素节点
-	var tabName = event.target.innerHTML;
+	var tabName = event.target.innerText;
+	usemould = $(event.target).attr("data-label");
 	console.log(event.target);
 	if(!tabName){//如果取不到说明是IE
     var d = $(event.target).attr('aria-describedby');
@@ -235,16 +238,21 @@ function addTabContent(event){
     console.log(tabName);
 	}
 	if(isShowDefaule){
-		tabName = $(tabName).html();
+		tabName = $(tabName).text();
 		if(!tabName){
-      tabName = event.target.innerHTML;
+      tabName = event.target.innerText;
 		}
 	}
 	if(tabCount === 0){
 		$('#contentList').html('');
 	}
+	var contentListHtml="";
 	var tabsHtml = '<li><a href="#tabs-'+tabCount+'">'+tabName+'</a><span title="close">X</span></li>';
-	var contentListHtml = '<div id="tabs-'+tabCount+'"><iframe id="preview'+tabCount+'" src="preview.jsp?id=preview'+tabCount+'" data-path="userFile/'+$(event.target).attr('data-time')+'.swf" frameborder="0" scrolling="no" width="100%" height="100%"></iframe></div>';
+	if(usemould){
+		contentListHtml = '<div id="tabs-'+tabCount+'"><div id="preview'+tabCount+'"><textarea id="content" name="content" class="form-control kindeditor kindeditorText'+tabCount1+'" style="width:99.5%;"></textarea><div class="btn-box" data-tab='+tabCount1+'><button class="btn btn-primary btnPost" type="button">发布</button><button class="btn btn-primary btnKeepIn" type="button" >暂存</button></div></div></div>'
+		iloaded();
+	}else
+		contentListHtml = '<div id="tabs-'+tabCount+'"><iframe id="preview'+tabCount+'" src="preview.jsp?id=preview'+tabCount+'" data-path="userFile/'+$(event.target).attr('data-time')+'.swf" frameborder="0" scrolling="no" width="100%" height="100%"></iframe></div>';
 	//添加到页面中
 	tabsList.append(tabsHtml);
 	//标签页添加之后首先设置其宽度
@@ -255,13 +263,41 @@ function addTabContent(event){
 	//将内容显示区定位到新打开的标签页
 	$('a[href=#tabs-'+tabCount+']').click();
 	//为新iframe添加load事件
-	$('#preview'+tabCount).load(function(){		
-		$('#loading').hide();
-		isShowDefaule = false;
-		$('#contentList').css({'top':'32px'});
-	});
+	$('#preview'+tabCount).load(iloaded);
+	if(usemould){
+		editors[tabCount1] = KindEditor.create('.kindeditorText'+tabCount1, {
+	        basePath: 'js/kindeditor',
+		    bodyClass : 'article-content',
+		    resizeType : 1,
+	        allowFileManager : false,
+		    allowPreviewEmoticons : false,
+		    allowImageUpload : false,
+	        bodyClass : 'article-content',
+	        items:[ 'undo', 'redo', '|','cut', 'copy', 'paste', '|', 'fontsize', 'bold', 'italic', 'underline', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist','insertunorderedlist','|','table']
+	    });
+		if(type){
+			$.post("selrviet/GetMouldById",{type:1,id:usemould},function(data){
+				editors[tabCount1].html(data);
+				tabCount1++;
+			});
+			$( "#importDocument-dialog" ).dialog("close");
+		}
+		else{
+			$.post("selrviet/GetMouldById",{type:2,id:usemould},function(data){
+				editors[tabCount1].html(data);
+				tabCount1++;
+			});
+			$( "#saveList-dialog" ).dialog("close");
+		}
+	}
 }
 
+//iframe添加load事件
+function iloaded(){		
+	$('#loading').hide();
+	isShowDefaule = false;
+	$('#contentList').css({'top':'32px'});
+}
 /*
  * 标签页个数检测函数，根据标签页的个数调整标签的宽度
  */
@@ -309,6 +345,7 @@ function allFile(n){//146行调用了这个方法
 			 }else if(type === '.jpg' || type === '.jpeg'){
 				 str += ' class="filejpg"';
 			 }
+			 console.log(objs[i]['realPath']);
 			 str += '><a class="file" title="双击打开" data-id='+objs[i]['id']+' data-time="'+objs[i]['timePath']+'">'+objs[i]['fileTitle']+'</a><a title="点击下载" href="servlet/DownloadFile?filename='+objs[i]['realPath']+'" class="downfile"></a></li>';
 		 }
 		 if($(".tree>li").length===0)
@@ -410,4 +447,174 @@ $(function(){
 		$("iframe",dialog).attr("width","100%");
 		$("iframe",dialog).attr("src","upPasswd.jsp");
 	});
+	
+	
+
+/*
+ * 录入文档和选择模版相关逻辑*/
+	
+	var moulds;
+	$("#importDocument").click(function(){
+		type=1;
+		$.get("serviet/CreateFile",function(data){
+			//data = JSON.parse(data);
+			data = eval("("+data+")");
+			moulds = data.contents;
+			var tils='',titles = data.titles;
+			if(titles){
+				titles.forEach(function(title,index){
+					tils+="<li class='fileli' data-label="+moulds[index]+">"+title+"</li>";
+				})
+			}
+			$( "#importDocument-dialog" ).html(tils);
+		});
+		$( "#importDocument-dialog" ).dialog("open");
+	});
+	
+	$("#saveList").click(function getKeepIn(){
+		type=0;
+		$.get("serviet/KeepInfile",function(data){
+			//data = JSON.parse(data);
+			data = eval("("+data+")");
+
+			var tils='',titles = data.titles,
+			ide = data.contents;
+			if(titles){
+				titles.forEach(function(title,index){
+					tils+="<li class='fileli' data-label="+ide[index]+">"+title+"<img class='keepDelete' src='css/images/icons/delete.png' alt='删除'><a class='downloadKeep' href='selrviet/DownloadKeepInWord?id="+ide[index]+"'><img src='css/images/icons/move-down.png' alt='下载'></a></li>";
+				})
+			}
+			$( "#saveList-dialog" ).html(tils);
+//			$(".keepDownload").on("click",function(e){
+//				e.stopPropagation();
+//				var deletenum = $(this).parent().attr("data-label");
+//				$('#loading').show();
+//				$.get("selrviet/DownloadKeepInWord",{id:deletenum},function(data){
+//					$('#loading').hide();
+//				});
+//			});
+			$(".downloadKeep").click(function(e){
+				e.stopPropagation();
+			});
+			$(".keepDelete").on("click",function(e){
+				e.stopPropagation();
+				var deletenum = $(this).parent().attr("data-label");
+				$( "#detele-confirm" ).dialog({
+				      resizable: false,
+				      modal: true,
+				      autoOpen :true,
+				      buttons: {
+				        "删除": function() {
+				          $( this ).dialog( "close" );
+							$.get("selrviet/GetMouldById",{id:deletenum},function(data){
+								getKeepIn();
+							});
+				        },
+				        "取消": function() {
+				          $( this ).dialog( "close" );
+				          return false;
+				        }
+				      }
+				});
+			});
+		});
+		$( "#saveList-dialog" ).dialog("open");
+	});
+	
+	$( "#importDocument-dialog" ).dialog({
+		autoOpen: false,
+		height: 400,
+		width:600,
+		modal: true,
+		draggable:false,
+		close: function(){//dialog被关闭后触发
+			
+		},
+	    buttons:{
+	    	"关闭":function(){
+	    		$( "#importDocument-dialog" ).dialog("close");
+	    	}
+	    }
+	});
+	
+	$( "#saveList-dialog" ).dialog({
+		autoOpen: false,
+		height: 400,
+		width:600,
+		modal: true,
+		draggable:false,
+		close: function(){//dialog被关闭后触发
+			
+		},
+		buttons:{
+	    	"关闭":function(){
+	    		$( "#saveList-dialog" ).dialog("close");
+	    	}
+	    }
+	});
+	//发布按钮
+	$(document).on('click','.btnPost',function(){
+		$this = $(this);
+		var num = $this.parent().attr('data-tab');
+		fileNameBox(1,num);
+		
+	});
+	//暂存按钮
+	$(document).on('click','.btnKeepIn',function(){
+		$this = $(this);
+		var num = $this.parent().attr('data-tab');
+    	fileNameBox(0,num);
+	});
+	$("#importDocument-dialog").on('click',"li",addTabContent);
+	$("#saveList-dialog").on('click',"li",addTabContent);
+	function fileNameBox(way,num){
+		var name = $( "#name" ),
+		allFields = $( [] ).add( name );
+	    $( "#dialog-form" ).attr("title","输入文件名称").find("p").text("");
+	    $( "#dialog-form>input" ).val("新建文件");
+	    $( "#dialog-form" ).dialog({
+		      modal: true,
+		      buttons: {
+		        "确认": function() {
+		          var bValid = true;
+		          allFields.removeClass( "ui-state-error" );
+		          bValid = bValid && checkLength( name, "文件名", 0);
+		          bValid = bValid && checkRegexp( name, /[^*?"<>|]/g, "文件名不能包括特殊字符" );
+		          
+		          if ( bValid ) {
+						var htmls = editors[num].html().replace(/\s\s/g,"");
+						if(way){
+							$('#loading').show();
+							$.post("serviet/CreateFile",{title:name.val(),content:htmls},function(data){
+								$('#loading').hide();
+								if(data == "1"){
+//									location.reload(true);
+									showul();
+									alert("发布成功");
+//									editors[num].html("");
+								}else if(data == "2"){
+									alert("发布失败");
+								}
+							});
+						}else{
+							$.post("serviet/KeepInfile",{title:name.val(),content:htmls},function(data){
+					    		if(data == "1"){
+					    			alert("暂存成功");
+					    		}else{
+					    			alert("暂存失败");
+					    		}
+					    	});
+						}
+						$( this ).dialog( "close" );
+		          }
+		        },
+		        "取消": function() {
+		              $( this ).dialog( "close" );
+		        }
+		      },
+		        close: function() {
+		            allFields.val( "" ).removeClass( "ui-state-error" );
+		        }
+		    });
+	}
 });
